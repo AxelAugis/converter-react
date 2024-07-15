@@ -34,6 +34,16 @@ function App() {
     document.getElementById('error').innerHTML = ""
   }
 
+  const switchCurrencies = () => {
+    const fromCurrency = document.getElementById('fromCurrency').value
+    const toCurrency = document.getElementById('toCurrency').value
+
+    document.getElementById('fromCurrency').value = toCurrency
+    document.getElementById('toCurrency').value = fromCurrency
+  
+    convert()
+  }
+
   return (
     <div className={`${styles.wrapper}`}>
       <div id="converter" className={`${styles.converter}`}>
@@ -45,6 +55,7 @@ function App() {
             <option value="GBP">GBP</option>
             <option value="YEN">YEN</option>
           </select>
+          <button onClick={switchCurrencies} className={`${styles.btnSwitch}`}>↔</button>
           <select id="toCurrency">
             <option value="EUR">EUR</option>
             <option value="USD">USD</option>
