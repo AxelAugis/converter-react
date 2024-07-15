@@ -13,8 +13,25 @@ function App() {
     const amount = document.getElementById('amount').value
     const fromCurrency = document.getElementById('fromCurrency').value
     const toCurrency = document.getElementById('toCurrency').value
+
+    // Check if the input is valid
+    if (amount <= 0 || isNaN(amount)) {
+      document.getElementById('result').innerHTML = ""
+      document.getElementById('error').innerHTML = "Veuillez entrer un montant valide."
+      return
+    }
+
+    // Check if the selected currencies are valid
+    if (!currencies[fromCurrency] || !currencies[toCurrency]) {
+      document.getElementById('result').innerHTML = ""
+      document.getElementById('error').innerHTML = "Veuillez sélectionner des devises valides."
+      return
+    }
+
     const result = amount * (currencies[toCurrency] / currencies[fromCurrency])
     document.getElementById('result').innerHTML = `${amount} ${fromCurrency} = ${result.toFixed(2)} ${toCurrency}`
+    // Clear the error message
+    document.getElementById('error').innerHTML = ""
   }
 
   return (
@@ -37,6 +54,7 @@ function App() {
         </div>
         <button onClick={convert} className={`${styles.btnConverter}`} >Convertir</button>
         <div id="result"></div>
+        <div id="error" className={`${styles.error}`}></div>
       </div>
     </div>
   )
